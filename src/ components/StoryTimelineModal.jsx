@@ -11,7 +11,7 @@ import {
 const storyPhases = [
   {
     title: 'Launch: School Days',
-    desc: 'From nursery to 10th at Sanjay Gandhi High School – where the dream began and scored 79.60%,',
+    desc: 'From nursery to 10th at Sanjay Gandhi High School – where the dream began and scored 79.60%.',
     icon: <FaSchool />,
   },
   {
@@ -38,18 +38,22 @@ const storyPhases = [
 
 export default function StoryTimelineModal({ onClose }) {
   return (
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center px-4">
+    <div
+      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center px-4"
+      onClick={onClose}
+    >
       <motion.div
+        onClick={(e) => e.stopPropagation()} // Prevent inner click from closing
         initial={{ opacity: 0, scale: 0.9, y: 50 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0 }}
-        className="max-w-5xl w-full bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-xl p-6 relative shadow-lg overflow-y-auto max-h-[90vh]"
+        className="max-w-5xl w-full bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-xl p-6 relative shadow-lg overflow-y-auto max-h-[55vh] md:max-h-[80vh]"
       >
         <button
-          className="absolute top-4 right-4 text-white hover:text-red-500 text-xl"
+          className="absolute top-4 right-4 text-white hover:text-red-500 z-50 text-2xl"
           onClick={onClose}
         >
-          ✕
+          X
         </button>
         <h2 className="text-3xl font-bold text-center text-white mb-10 tracking-wide">
           <span className="text-indigo-400">My Journey</span> – Time Travel Timeline
