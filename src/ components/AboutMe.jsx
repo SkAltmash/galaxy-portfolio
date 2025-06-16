@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useState, useEffect } from 'react';
-import avatar from '/src/assets/astronaut.png';
+import avatar from '/public/assets/astronaut.png';
 import StoryTimelineModal from './StoryTimelineModal';
 export default function AboutMe() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });

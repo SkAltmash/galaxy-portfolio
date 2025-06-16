@@ -1,6 +1,6 @@
 import React from "react";
-import astronaut from "/src/assets/astronaut.png";
-import galaxy from "/src/assets/stars.jpg"; // any galaxy/star bg image
+import astronaut from "/public/assets/astronaut.png";
+import galaxy from "/public/assets/stars.jpg"; 
 
 export default function GalaxyHero() {
   return (
