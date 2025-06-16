@@ -10,6 +10,8 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faServer } from '@fortawesome/free-solid-svg-icons';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const projects = [
   {
@@ -113,12 +115,13 @@ export default function Projects() {
     dots: true,
     infinite: true,
     speed: 500,
+    autoplay: true,
+    autoplaySpeed: 3000,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
-    autoplay: true,
-    autoplaySpeed: 3000,
     swipe: true,
+    lazyLoad: 'ondemand', // ✅ enables lazy loading in react-slick
     responsive: [
       {
         breakpoint: 768,
@@ -132,7 +135,7 @@ export default function Projects() {
   return (
     <section className="py-20 bg-black text-white">
       <h2 className="text-4xl font-bold text-center mb-12">
-         Projects from Another Galaxy
+        Projects from Another Galaxy
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-8">
@@ -149,13 +152,18 @@ export default function Projects() {
             <img
               src={project.image}
               alt={project.title}
+              loading="lazy" // ✅ native lazy loading
               className="w-full h-80 object-cover"
             />
 
             <div className="absolute bottom-0 h-full w-full bg-black/60 py-4 text-center flex flex-col justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-              <p className='text-blue-600 text-lg font-semibold'>{project.title}</p>
+              <p className="text-blue-600 text-lg font-semibold">
+                {project.title}
+              </p>
               <p>{project.description}</p>
-              <p className="text-blue-400 text-lg font-semibold">Click for more →</p>
+              <p className="text-blue-400 text-lg font-semibold">
+                Click for more →
+              </p>
             </div>
 
             <div className="p-6">
@@ -190,7 +198,7 @@ export default function Projects() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white/10 backdrop-blur-md text-white rounded-2xl p-6 max-w-3xl w-full relative  max-h-[90vh]"
+              className="bg-white/10 backdrop-blur-md text-white rounded-2xl p-6 max-w-3xl w-full relative max-h-[90vh] overflow-y-auto"
             >
               <button
                 onClick={() => setSelected(null)}
@@ -211,6 +219,7 @@ export default function Projects() {
                     <img
                       src={src}
                       alt={`screenshot-${i}`}
+                      loading="lazy"
                       className="rounded-lg border border-white/20 max-h-[350px] mx-auto"
                     />
                   </div>
@@ -222,6 +231,7 @@ export default function Projects() {
                 <a
                   href={selected.link}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-indigo-500 hover:bg-indigo-600 px-4 py-2 rounded text-sm font-medium"
                 >
                   Live Demo
@@ -229,6 +239,7 @@ export default function Projects() {
                 <a
                   href={selected.github}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded text-sm font-medium"
                 >
                   GitHub Repo
