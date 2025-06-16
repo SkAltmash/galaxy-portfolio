@@ -133,7 +133,8 @@ export default function Projects() {
   };
 
   return (
-    <section className="py-20 bg-black text-white">
+    <section className="py-20 bg-black text-white"
+    id='projects'>
       <h2 className="text-4xl font-bold text-center mb-12">
         Projects from Another Galaxy
       </h2>

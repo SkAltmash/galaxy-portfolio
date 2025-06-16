@@ -25,8 +25,9 @@ const skills = [
 
 export default function Skills() {
   return (
-    <section className="bg-gradient-to-b from-black via-[#0a0a23] to-black text-white py-20 relative overflow-hidden">
-      <h2 className="text-4xl font-bold text-center mb-12">Tech Stack</h2>
+    <section className="bg-gradient-to-b from-black via-[#0a0a23] to-black text-white py-20 relative overflow-hidden"
+    id='skills'>
+      <h2 className="text-4xl font-bold text-center mb-12">Tech Galaxy</h2>
 
       <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 px-6">
         {skills.map((skill, i) => (

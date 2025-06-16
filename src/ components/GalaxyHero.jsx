@@ -1,10 +1,14 @@
 import React from "react";
 import astronaut from "/public/assets/astronaut.png";
-import galaxy from "/public/assets/stars.jpg"; 
+import galaxy from "/public/assets/stars.jpg";
+import { FaGithub, FaLinkedin,FaRocket } from "react-icons/fa";
 
 export default function GalaxyHero() {
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-black text-white">
+    <section
+      className="relative w-full h-screen overflow-hidden bg-black text-white"
+      id="hero"
+    >
       {/* Galaxy Background */}
       <img
         src={galaxy}
@@ -12,7 +16,7 @@ export default function GalaxyHero() {
         alt="Galaxy Background"
       />
 
-      {/* Floating Avatar */}
+      {/* Floating Avatar & Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
         <img
           src={astronaut}
@@ -25,19 +29,33 @@ export default function GalaxyHero() {
         <p className="text-lg md:text-2xl text-gray-300 max-w-xl mb-8">
           Crafting cosmic UIs with React, Firebase & imagination.
         </p>
-        <div className="flex gap-4">
+
+        {/* Social Icons + Resume Button */}
+        <div className="flex items-center gap-6">
           <a
-            href="#projects"
-            className="bg-white/10 px-6 py-2 rounded-xl border border-white text-white hover:bg-white/20 transition backdrop-blur-md"
+            href="https://github.com/SkAltmash"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white text-2xl hover:text-blue-400 transition"
           >
-            View Work
+            <FaGithub />
           </a>
           <a
-            href="#contact"
-            className="border border-white px-6 py-2 rounded-xl hover:bg-white hover:text-black transition"
+            href="https://www.linkedin.com/in/altamash-sheikh-1ba6a72aa/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white text-2xl hover:text-blue-400 transition"
           >
-            Contact
+            <FaLinkedin />
           </a>
+        <a
+         href="/Altamash_Resume.pdf"
+         target="_blank"
+         className="bg-white/10 px-5 py-2 flex gap-2 items-center justify-center text-sm md:text-base rounded-xl border border-white hover:bg-white hover:text-black transition backdrop-blur-md"
+         >
+         <FaRocket /> Launch Resume
+        </a>
+
         </div>
       </div>
     </section>

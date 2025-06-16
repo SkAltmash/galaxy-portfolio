@@ -11,7 +11,7 @@ import {
 const storyPhases = [
   {
     title: 'Launch: School Days',
-    desc: 'From nursery to 10th at Sanjay Gandhi High School – where the dream began.',
+    desc: 'From nursery to 10th at Sanjay Gandhi High School – where the dream began and scored 79.60%,',
     icon: <FaSchool />,
   },
   {
