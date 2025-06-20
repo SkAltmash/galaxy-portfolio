@@ -1,28 +1,18 @@
-import { useState } from 'react';
-import Navbar from './ components/Navbar';
-import Hero from './ components/GalaxyHero';
-import AboutMe from './ components/AboutMe';
-import Skills from './ components/Skills';
-import Projects from './ components/Projects';
-import Services from './ components/Services';
-import Contact from './ components/Contact';
-import Footer from './ components/Footer';
-import BackToTopRocket from './ components/BackToTopRocket';
+import React from 'react'
+import { Routes ,Route} from 'react-router-dom'
+import Mainpage from './Pages/Mainpage'
+import ProjectDetail from './Pages/ProjectDetail'
+import  Footer from './ components/Footer'
 function App() {
-
   return (
-    <>
-    <Navbar />
-     <Hero />
-     <AboutMe />
-     <Projects />
-     <Skills />
-     <Services />
-     <Contact />
-     <Footer />
-     <BackToTopRocket />     
-    </>
-  );
+   <>
+    <Routes>
+      <Route path="/" element={<Mainpage />} />
+      <Route path="/projects/:slug" element={<ProjectDetail />} />
+    </Routes>
+    <Footer />
+   </>
+  )
 }
 
-export default App;
+export default App
