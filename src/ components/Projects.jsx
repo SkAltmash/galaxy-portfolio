@@ -29,7 +29,6 @@ const projects = [
     slug: 'flickstream-v2',
     title: 'FlickStream V2',
     image: '/assets/flickstreamV2.png',
-    screenshots: [ /* ... */ ],
     description:
       'TMDB‑powered movie streaming app with login, watchlist, comments, chat using Firebase & React.',
     link: 'https://flickstreamvtwo.netlify.app',
@@ -40,13 +39,23 @@ const projects = [
     slug: 'flickstream-v1',
     title: 'FlickStream V1',
     image: '/assets/flickstreamV1.png',
-    screenshots: [ /* ... */ ],
     description:
       'TMDB movie explorer using vanilla JS. Search, details, trailers, watchlist—lightweight & fast.',
     link: 'https://flickstreamvtwo.netlify.app',
     github: 'https://github.com/SkAltmash/flickstreembysk',
     technologies: [faHtml5, faCss3Alt, faJs, faGithub, faServer],
   },
+  {
+  slug: 'pathan-tutorials',
+  title: 'Pathan Tutorials of Mathematics',
+  image: '/assets/pathan-tutorials.png',
+  description:
+    'A real-world educational website built for Pathan Tutorials of Mathematics (Hinganghat). Showcases batches, contact info, courses, and modern design. Built with React and MailJS.',
+  link: 'https://pathtutorials.netlify.app', // Replace with your actual URL
+  github: 'https://github.com/SkAltmash/PathanTutorials', // Replace if private or not available
+  technologies: [faReact, faCss3Alt, faJs, faGithub],
+},
+
 ];
 
 const sliderSettings = {

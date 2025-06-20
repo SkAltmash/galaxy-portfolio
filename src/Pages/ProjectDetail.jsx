@@ -37,7 +37,7 @@ const projects = [
       '/assets/Trendora/trendora14.png',
     ],
     description:
-      '🌌 Modern E-commerce app built with React & Firebase. Full Admin Panel, Cart, Coupon System, Product Manager – fully responsive!',
+      'Modern E-commerce app built with React & Firebase. Full Admin Panel, Cart, Coupon System, Product Manager – fully responsive!',
     link: 'https://astrendora.netlify.app/',
     github: 'https://github.com/SkAltmash/Trendora',
     technologies: [faReact, faGithub, faCss3Alt, faJs],
@@ -64,7 +64,7 @@ const projects = [
       '/assets/FlickstreamV2/FlickstreamVtwo14.png',
     ],
     description:
-      '🚀 Movie streaming app with TMDB, Firebase chat, real-time comments, and watchlist. Built in React + Tailwind.',
+      ' Movie streaming app with TMDB, Firebase chat, real-time comments, and watchlist. Built in React + Tailwind.',
     link: 'https://flickstreamvtwo.netlify.app',
     github: 'https://github.com/SkAltmash/FlickStreamV2',
     technologies: [faReact, faGithub, faCss3Alt, faJs, faServer],
@@ -86,11 +86,32 @@ const projects = [
       '/assets/FlickstreamV1/flickstream10.png',
     ],
     description:
-      '🛰 FlickStream V1 – a simple TMDB movie explorer using vanilla JS, trailers, search, and fast performance!',
+      'FlickStream V1 – a simple TMDB movie explorer using vanilla JS, trailers, search, and fast performance!',
     link: 'https://asflickstream.netlify.app/',
     github: 'https://github.com/SkAltmash/flickstreembysk',
     technologies: [faHtml5, faCss3Alt, faJs, faGithub],
   },
+  {
+  slug: 'pathan-tutorials',
+  title: 'Pathan Tutorials of Mathematics',
+  image: '/assets/pathan-tutorials.png',
+   screenshots: [
+      '/assets/pathan-tutorials/pathan-tutorials1.png',
+      '/assets/pathan-tutorials/pathan-tutorials2.png',
+      '/assets/pathan-tutorials/pathan-tutorials3.png',
+      '/assets/pathan-tutorials/pathan-tutorials4.png',
+      '/assets/pathan-tutorials/pathan-tutorials5.png',
+      '/assets/pathan-tutorials/pathan-tutorials6.png',
+      '/assets/pathan-tutorials/pathan-tutorials7.png',
+      '/assets/pathan-tutorials/pathan-tutorials8.png',
+
+    ],
+  description:
+    'A real-world educational website built for Pathan Tutorials of Mathematics (Hinganghat). Showcases batches, contact info, courses, and modern design. Built with React and MailJS.',
+  link: 'https://pathan-tutorials.netlify.app/',
+  github: 'https://github.com/SkAltmash/PathanTutorials', 
+  technologies: [faReact, faCss3Alt, faJs, faGithub],
+},
 ];
 
 export default function ProjectDetail() {
@@ -181,15 +202,7 @@ const [previewMode, setPreviewMode] = useState('desktop');
         </div>
       </motion.div>
 
-      {/* Toggle Button */}
-      <div className="flex justify-center mb-6">
-        <button
-          onClick={() => setPreviewMode(prev => (prev === 'desktop' ? 'mobile' : 'desktop'))}
-          className="px-4 py-1 bg-white text-black rounded-md text-sm font-medium shadow-md hover:bg-gray-100 transition"
-        >
-          Switch to {previewMode === 'desktop' ? 'Mobile' : 'Desktop'} View
-        </button>
-      </div>
+     
 
       {/* Heading: Live Preview */}
       <h2 className="text-xl font-semibold text-center text-white/90 mb-3 tracking-wide">
@@ -239,7 +252,15 @@ const [previewMode, setPreviewMode] = useState('desktop');
     </div>
   )}
 </div>
-
+ {/* Toggle Button */}
+      <div className="flex justify-center mb-6">
+        <button
+          onClick={() => setPreviewMode(prev => (prev === 'desktop' ? 'mobile' : 'desktop'))}
+          className="px-4 py-1 bg-white text-black rounded-md text-sm font-medium shadow-md hover:bg-gray-100 transition"
+        >
+          Switch to {previewMode === 'desktop' ? 'Mobile' : 'Desktop'} View
+        </button>
+      </div>
 
       {/* Action Buttons */}
       <div className="flex gap-4 justify-center flex-wrap mb-10">
