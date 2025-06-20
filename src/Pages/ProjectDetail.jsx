@@ -94,6 +94,7 @@ const projects = [
 ];
 
 export default function ProjectDetail() {
+    
   const { slug } = useParams();
   const project = projects.find(p => p.slug === slug);
   const [iframeLoaded, setIframeLoaded] = useState(false);
@@ -128,6 +129,7 @@ const [previewMode, setPreviewMode] = useState('desktop');
   }
 
  return (
+
   <section className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white px-4 py-10 md:px-16">
     <div className="max-w-5xl mx-auto">
       {/* Back Button */}
@@ -157,28 +159,27 @@ const [previewMode, setPreviewMode] = useState('desktop');
       </h2>
 
       {/* Screenshot Slider */}
-     <motion.div
-  className="mb-12"
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ delay: 0.2 }}
->
-  <div className="mx-auto max-w-[850px] w-full px-4">
-    <Slider {...sliderSettings}>
-      {project.screenshots.map((src, i) => (
-        <div key={i} className="flex justify-center items-center">
-          <img
-            src={src}
-            alt={`screenshot-${i}`}
-            loading="lazy"
-            className="rounded-lg border border-white/20 max-h-[400px] w-auto h-auto object-contain mx-auto"
-          />
+      <motion.div
+        className="mb-12"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        <div className="mx-auto max-w-[850px] w-full px-4">
+          <Slider {...sliderSettings}>
+            {project.screenshots.map((src, i) => (
+              <div key={i} className="flex justify-center items-center">
+                <img
+                  src={src}
+                  alt={`screenshot-${i}`}
+                  loading="lazy"
+                  className="rounded-lg border border-white/20 max-h-[400px] w-auto h-auto object-contain mx-auto"
+                />
+              </div>
+            ))}
+          </Slider>
         </div>
-      ))}
-    </Slider>
-  </div>
-</motion.div>
-
+      </motion.div>
 
       {/* Toggle Button */}
       <div className="flex justify-center mb-6">
@@ -195,37 +196,50 @@ const [previewMode, setPreviewMode] = useState('desktop');
         ⟡ Live Preview ⟡
       </h2>
 
-      {/* Live Preview Box */}
-      <div className="bg-white/5 border border-white/10 rounded-xl shadow-xl mb-10 overflow-hidden">
-        {/* Fake Browser Header */}
-        <div className="flex items-center px-4 py-2 bg-gray-800 text-white text-sm font-mono border-b border-white/10">
-          <span className="w-3 h-3 bg-red-400 rounded-full mr-2" />
-          <span className="w-3 h-3 bg-yellow-400 rounded-full mr-2" />
-          <span className="w-3 h-3 bg-green-400 rounded-full mr-4" />
-          <span className="truncate">{project.link}</span>
-        </div>
+    {/* Live Preview Box */}
+<div className="bg-white/5 border border-white/10 rounded-xl shadow-xl mb-10 overflow-hidden">
+  {/* Fake Browser Header */}
+  <div className="flex items-center px-4 py-2 bg-gray-800 text-white text-sm font-mono border-b border-white/10">
+    <span className="w-3 h-3 bg-red-400 rounded-full mr-2" />
+    <span className="w-3 h-3 bg-yellow-400 rounded-full mr-2" />
+    <span className="w-3 h-3 bg-green-400 rounded-full mr-4" />
+    <span className="truncate">{project.link}</span>
+  </div>
 
-        {/* Iframe or Loader */}
-        {!iframeLoaded ? (
-          <div className="flex flex-col items-center justify-center h-[350px] bg-gradient-to-r from-black via-gray-900 to-black animate-pulse text-white font-mono gap-3">
-            <div className="w-10 h-10 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
-            <p className="text-sm tracking-wide">Launching live preview...</p>
-          </div>
-        ) : (
-          <div className={`w-full ${previewMode === 'mobile' ? 'overflow-x-auto' : ''}`}>
-            <iframe
-              src={project.link}
-              title="Live Preview"
-              loading="lazy"
-              className={`transition-opacity duration-500 border-0 bg-white ${
-                previewMode === 'mobile'
-                  ? 'w-[375px] h-[667px] rounded-md shadow-xl mx-auto'
-                  : 'w-full h-[450px]'
-              } ${iframeLoaded ? 'opacity-100' : 'opacity-0'}`}
-            />
-          </div>
-        )}
+  {/* Iframe Loader / Preview */}
+  {!iframeLoaded ? (
+    <div className="flex flex-col items-center justify-center h-[350px] bg-gradient-to-r from-black via-gray-900 to-black animate-pulse text-white font-mono gap-3">
+      <div className="w-10 h-10 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+      <p className="text-sm tracking-wide">Launching live preview...</p>
+            { window.scrollTo({top: 0,left: 0,behavior: "smooth"})}
       </div>
+  ) : (
+    <div
+      className={`w-full flex justify-center ${
+        previewMode === 'mobile' ? 'overflow-x-auto px-2' : ''
+      }`}
+    >
+      <div
+        className={`${
+          previewMode === 'mobile'
+            ? 'w-[390px] h-[667px]' // slightly more width to simulate iPhone
+            : 'w-full max-w-[1024px] h-[500px]'
+        } bg-white transition-all duration-300 rounded-md overflow-hidden shadow-lg`}
+      >
+        <iframe
+          src={project.link}
+          title="Live Preview"
+          loading="lazy"
+          allow="fullscreen"
+          className={`w-full h-full transition-opacity duration-500 border-none ${
+            iframeLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+      </div>
+    </div>
+  )}
+</div>
+
 
       {/* Action Buttons */}
       <div className="flex gap-4 justify-center flex-wrap mb-10">
@@ -256,6 +270,7 @@ const [previewMode, setPreviewMode] = useState('desktop');
     </div>
   </section>
 );
+
 
 
 }
