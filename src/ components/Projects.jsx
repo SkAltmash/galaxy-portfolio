@@ -227,12 +227,12 @@ return (
                   whileHover={{ scale: 1.05 }}
                   className={`px-4 py-1 rounded-md border text-sm transition-all duration-300 ${
                     activeTab === tab
-                      ? 'bg-white text-black shadow-md'
+                      ? 'bg-indigo-400 text-black shadow-md'
                       : 'border-white/50 text-white hover:border-white'
                   }`}
                   onClick={() => setActiveTab(tab)}
                 >
-                  {tab === 'screenshots' ? '🖼️ Screenshots' : '🌐 Live Preview'}
+                  {tab === 'screenshots' ? 'Screenshots' : 'Live Preview'}
                 </motion.button>
               ))}
             </div>
@@ -241,48 +241,49 @@ return (
             {activeTab === 'screenshots' ? (
               <Slider {...sliderSettings}>
                 {selected.screenshots.map((src, i) => (
-                  <div key={i} className="flex justify-center">
+                  <div key={i} className="flex justify-center w-full">
                     <img
                       src={src}
                       alt={`screenshot-${i}`}
                       loading="lazy"
-                      className="rounded-lg border border-white/20 max-h-[350px] mx-auto"
+                      className="rounded-lg border border-white/20 max-h-[350px] w-full object-contain"
                     />
                   </div>
                 ))}
               </Slider>
             ) : (
-              <div className="mt-2 mx-auto max-w-[850px] rounded-xl overflow-hidden bg-white/5 border shadow-xl">
-  {/* Header */}
-  <div className="flex items-center px-4 py-2 bg-gray-800 text-white text-sm font-mono border-b border-white/10">
-    <span className="w-3 h-3 bg-red-400 rounded-full mr-2"></span>
-    <span className="w-3 h-3 bg-yellow-400 rounded-full mr-2"></span>
-    <span className="w-3 h-3 bg-green-400 rounded-full mr-4"></span>
-    {selected.link}
-  </div>
+              <div className="mt-2 w-full px-2 sm:px-0">
+                <div className="rounded-xl overflow-hidden bg-white/5 border shadow-xl mx-auto max-w-[850px]">
+                  {/* Browser Header */}
+                  <div className="flex items-center px-4 py-2 bg-gray-800 text-white text-sm font-mono border-b border-white/10">
+                    <span className="w-3 h-3 bg-red-400 rounded-full mr-2"></span>
+                    <span className="w-3 h-3 bg-yellow-400 rounded-full mr-2"></span>
+                    <span className="w-3 h-3 bg-green-400 rounded-full mr-4"></span>
+                    <span className="truncate">{selected.link}</span>
+                  </div>
 
-  {/* Loader */}
-  {!iframeLoaded && (
-    <div className="flex flex-col items-center justify-center h-[350px] bg-black/50 text-white font-mono gap-3">
-      <div className="w-10 h-10 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
-      <p>🚀 Preparing server...</p>
-    </div>
-  )}
+                  {/* Loading Spinner */}
+                  {!iframeLoaded && (
+                    <div className="flex flex-col items-center justify-center h-[350px] bg-black/50 text-white font-mono gap-3">
+                      <div className="w-8 h-8 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+                      <p>🚀 Preparing server...</p>
+                    </div>
+                  )}
 
-  {/* iFrame */}
-  <div className="bg-black flex justify-center items-center">
-    <iframe
-      src={selected.link}
-      className={`transition-opacity duration-500 rounded-none w-full h-[350px] md:h-[400px] ${
-        iframeLoaded ? 'opacity-100' : 'opacity-0'
-      }`}
-      loading="lazy"
-      onLoad={() => setIframeLoaded(true)}
-      title="Live Preview"
-    />
-  </div>
-</div>
-
+                  {/* Iframe */}
+                  <div className="flex justify-center">
+                    <iframe
+                      src={selected.link}
+                      title="Live Preview"
+                      loading="lazy"
+                      onLoad={() => setIframeLoaded(true)}
+                      className={`w-full h-[350px] md:h-[400px] transition-opacity duration-500 border-0 ${
+                        iframeLoaded ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    />
+                  </div>
+                </div>
+              </div>
             )}
 
             {/* Action Buttons */}
@@ -321,5 +322,8 @@ return (
     </AnimatePresence>
   </section>
 );
+
+
+
 
 }
