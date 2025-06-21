@@ -26,7 +26,7 @@ const journey = [
 
 export default function ProjectJourney() {
   return (
-    <section className="relative px-4 py-20 md:px-16 bg-gradient-to-b from-black via-[#0e0e2c] to-black text-white overflow-hidden">
+    <section className="relative  rounded-2xl px-4 py-20 md:px-16 bg-gradient-to-b from-black via-[#0e0e2c] to-black text-white overflow-hidden">
 
    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] bg-cover bg-center opacity-10 pointer-events-none z-0" />
 

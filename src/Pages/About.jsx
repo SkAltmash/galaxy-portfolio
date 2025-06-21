@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ProjectJourney from './ProjectJourney';
 import JourneyTimeline from '../ components/JourneyTimeline';
-
+import OpenSourceRadar from '../ components/OpenSourceRadar';
 const storyPhases = [
   {
     title: 'Launch: School Days',
@@ -115,7 +115,7 @@ export default function About() {
             <SiNetlify className="text-teal-400" title="Netlify" />
           </motion.div>
         </div>
-
+        <OpenSourceRadar />
         {/* Timeline */}
         <div>
           <h2 className="text-2xl font-semibold text-center mb-6">My Journey</h2>
