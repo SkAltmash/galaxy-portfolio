@@ -20,8 +20,7 @@ export default function OpenSourceRadar() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-        Open Source Radar
-        </motion.h2>
+Dev Orbit Tracker	        </motion.h2>
 
         {/* Description */}
         <motion.p
