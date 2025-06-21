@@ -18,7 +18,7 @@ const projects = [
     slug: 'trendora-ecommerce',
     title: 'Trendora E-commerce',
     image: '/assets/trendora.png',
-    screenshots: [ /* ... */ ],
+    screenshots: [],
     description:
       'Modern E-commerce app built with React and Firebase. Admin panel, product management, cart, coupon system and responsive design.',
     link: 'https://astrendora.netlify.app/',
@@ -46,35 +46,34 @@ const projects = [
     technologies: [faHtml5, faCss3Alt, faJs, faGithub, faServer],
   },
   {
-  slug: 'pathan-tutorials',
-  title: 'Pathan Tutorials of Mathematics',
-  image: '/assets/pathan-tutorials.png',
-  description:
-    'A real-world educational website built for Pathan Tutorials of Mathematics (Hinganghat). Showcases batches, contact info, courses, and modern design. Built with React and MailJS.',
-  link: 'https://pathtutorials.netlify.app', // Replace with your actual URL
-  github: 'https://github.com/SkAltmash/PathanTutorials', // Replace if private or not available
-  technologies: [faReact, faCss3Alt, faJs, faGithub],
-},
-
+    slug: 'pathan-tutorials',
+    title: 'Pathan Tutorials of Mathematics',
+    image: '/assets/pathan-tutorials.png',
+    description:
+      'A real-world educational website built for Pathan Tutorials of Mathematics (Hinganghat). Showcases batches, contact info, courses, and modern design. Built with React and MailJS.',
+    link: 'https://pathtutorials.netlify.app',
+    github: 'https://github.com/SkAltmash/PathanTutorials',
+    technologies: [faReact, faCss3Alt, faJs, faGithub],
+  },
 ];
 
-const sliderSettings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  autoplay: true,
-  autoplaySpeed: 3000,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: true,
-  swipe: true,
-  lazyLoad: 'ondemand',
-  responsive: [
-    {
-      breakpoint: 768,
-      settings: { arrows: false },
-    },
-  ],
+const getTechColor = (icon) => {
+  switch (icon.iconName) {
+    case 'html5':
+      return 'text-orange-500';
+    case 'css3-alt':
+      return 'text-blue-500';
+    case 'js':
+      return 'text-yellow-400';
+    case 'react':
+      return 'text-cyan-400';
+    case 'github':
+      return 'text-gray-300';
+    case 'server':
+      return 'text-indigo-400';
+    default:
+      return 'text-white';
+  }
 };
 
 export default function Projects() {
@@ -112,9 +111,14 @@ export default function Projects() {
                 <p className="text-sm text-gray-300 mb-3">
                   {project.description.substring(0, 70)}...
                 </p>
-                <div className="flex gap-3">
+                <div className="flex gap-3 flex-wrap">
                   {project.technologies.map((tech, i) => (
-                    <FontAwesomeIcon key={i} icon={tech} className="text-lg text-white/80" />
+                    <FontAwesomeIcon
+                      key={i}
+                      icon={tech}
+                      className={`text-lg ${getTechColor(tech)}`}
+                      title={tech.iconName}
+                    />
                   ))}
                 </div>
               </div>

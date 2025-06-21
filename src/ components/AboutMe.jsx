@@ -2,7 +2,8 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useState, useEffect } from 'react';
 import avatar from '/public/assets/astronaut.png';
-import StoryTimelineModal from './StoryTimelineModal';
+import { link } from 'framer-motion/client';
+import { Link } from 'react-router-dom';
 export default function AboutMe() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 const [showModal, setShowModal] = useState(false); 
@@ -59,14 +60,15 @@ const [showModal, setShowModal] = useState(false);
 
           {/* Popup Button */}
           <div className="mt-8">
-            <button
-            onClick={() => setShowModal(true)}
+           <Link to="/About">
+              <button 
+
             className="mt-10 px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-pink-500 hover:to-purple-600 transition-all duration-300 text-white rounded-full shadow-lg"
            >
-            View My Story
+            View More
           </button>
+           </Link>
           </div>
-        {showModal && <StoryTimelineModal onClose={() => setShowModal(false)} />}
 
         </motion.div>
 

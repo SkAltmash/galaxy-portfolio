@@ -13,10 +13,10 @@ export default function Contact() {
 
     emailjs
       .sendForm(
-        "service_ignny5q",       // Your EmailJS service ID
-        "template_lto1r2d",      // Your EmailJS template ID
+        "service_ignny5q",       
+        "template_lto1r2d",     
         form.current,
-        "dce5ax0pBBQNz2sE-"      // Your EmailJS public key
+        "dce5ax0pBBQNz2sE-"      
       )
       .then(() => {
         setSent(true);

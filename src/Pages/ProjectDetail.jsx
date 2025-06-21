@@ -114,16 +114,25 @@ const projects = [
 },
 ];
 
+const iconColors = {
+  [faReact.iconName]: 'text-blue-400',
+  [faJs.iconName]: 'text-yellow-400',
+  [faHtml5.iconName]: 'text-orange-500',
+  [faCss3Alt.iconName]: 'text-blue-500',
+  [faGithub.iconName]: 'text-gray-300',
+  [faServer.iconName]: 'text-green-400',
+};
+
 export default function ProjectDetail() {
-    
   const { slug } = useParams();
   const project = projects.find(p => p.slug === slug);
   const [iframeLoaded, setIframeLoaded] = useState(false);
-const [previewMode, setPreviewMode] = useState('desktop');
+  const [previewMode, setPreviewMode] = useState('desktop');
 
   useEffect(() => {
     setIframeLoaded(false);
     const timer = setTimeout(() => setIframeLoaded(true), 5000);
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     return () => clearTimeout(timer);
   }, [slug]);
 
@@ -132,7 +141,7 @@ const [previewMode, setPreviewMode] = useState('desktop');
     infinite: true,
     speed: 600,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 3500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
@@ -143,155 +152,141 @@ const [previewMode, setPreviewMode] = useState('desktop');
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-white bg-gradient-to-br from-black via-gray-900 to-black">
-        <p className="text-xl"> Project not found</p>
+      <div className="min-h-screen flex items-center justify-center text-white bg-black">
+        <p className="text-xl">Project not found</p>
       </div>
     );
   }
 
- return (
+  const otherProjects = projects.filter(p => p.slug !== slug);
 
-  <section className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white px-4 py-10 md:px-16">
-    <div className="max-w-5xl mx-auto">
-      {/* Back Button */}
-      <div className="mb-6">
-        <Link to="/#projects" className="text-blue-400 hover:underline text-sm">
-          ← Back to Projects
-        </Link>
-      </div>
+  return (
+    <section className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white px-4 py-10 md:px-16">
+      <div className="max-w-5xl mx-auto">
 
-      {/* Title */}
-      <motion.h1
-        className="text-3xl md:text-4xl font-bold mb-4 text-center text-white drop-shadow-lg"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-      >
-        {project.title}
-      </motion.h1>
+        {/* Back Button */}
+        <div className="mb-6">
+          <Link to="/#projects" className="text-blue-400 hover:underline text-sm">
+            ← Back to Projects
+          </Link>
+        </div>
 
-      {/* Description */}
-      <p className="text-gray-300 text-center max-w-3xl mx-auto mb-8 whitespace-pre-line leading-relaxed">
-        {project.description}
-      </p>
+        {/* Project Title */}
+        <motion.h1
+          className="text-3xl md:text-4xl font-bold mb-4 text-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          {project.title}
+        </motion.h1>
 
-      {/* Heading: Screenshots */}
-      <h2 className="text-xl font-semibold text-center text-white/90 mb-4 tracking-wide">
-        ⟡ Project Screenshots ⟡
-      </h2>
-
-      {/* Screenshot Slider */}
-      <motion.div
-        className="mb-12"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-      >
-        <div className="mx-auto max-w-[850px] w-full px-4">
+        <p className="text-gray-300 text-center max-w-3xl mx-auto mb-8">
+          {project.description}
+        </p>
+        {/* Tech Stack Icons with Color */}
+        <div className="flex gap-4 justify-center mb-16 flex-wrap text-xl">
+          {project.technologies.map((tech, i) => (
+            <FontAwesomeIcon
+              key={i}
+              icon={tech}
+              className={`${iconColors[tech.iconName] || 'text-white/80'} text-2xl`}
+            />
+          ))}
+        </div>
+        {/* Screenshots */}
+        <h2 className="text-xl font-semibold text-center mb-4">⟡ Project Screenshots ⟡</h2>
+        <div className="max-w-[850px] mx-auto mb-10">
           <Slider {...sliderSettings}>
             {project.screenshots.map((src, i) => (
-              <div key={i} className="flex justify-center items-center">
+              <div key={i} className="flex justify-center">
                 <img
                   src={src}
                   alt={`screenshot-${i}`}
-                  loading="lazy"
-                  className="rounded-lg border border-white/20 max-h-[400px] w-auto h-auto object-contain mx-auto"
+                  className="rounded-lg border border-white/20 max-h-[400px] object-contain"
                 />
               </div>
             ))}
           </Slider>
         </div>
-      </motion.div>
 
-     
+        {/* Live Preview */}
+        <h2 className="text-xl font-semibold text-center mb-3">⟡ Live Preview ⟡</h2>
+        <div className="bg-white/5 border border-white/10 rounded-xl mb-6 overflow-hidden">
+          <div className="flex items-center px-4 py-2 bg-gray-800 text-white text-sm font-mono border-b border-white/10">
+            <span className="w-3 h-3 bg-red-400 rounded-full mr-2" />
+            <span className="w-3 h-3 bg-yellow-400 rounded-full mr-2" />
+            <span className="w-3 h-3 bg-green-400 rounded-full mr-4" />
+            <span className="truncate">{project.link}</span>
+          </div>
 
-      {/* Heading: Live Preview */}
-      <h2 className="text-xl font-semibold text-center text-white/90 mb-3 tracking-wide">
-        ⟡ Live Preview ⟡
-      </h2>
+          {!iframeLoaded ? (
+            <div className="flex flex-col items-center justify-center h-[350px] bg-black animate-pulse text-white gap-3">
+              <div className="w-10 h-10 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+              <p className="text-sm">Launching live preview...</p>
+            </div>
+          ) : (
+            <div className={`w-full flex justify-center ${previewMode === 'mobile' ? 'overflow-x-auto px-2' : ''}`}>
+              <div className={`${previewMode === 'mobile' ? 'w-[390px] h-[667px]' : 'w-full max-w-[1024px] h-[500px]'} bg-white transition-all duration-300 rounded overflow-hidden`}>
+                <iframe
+                  src={project.link}
+                  title="Live Preview"
+                  loading="lazy"
+                  allow="fullscreen"
+                  className="w-full h-full border-none"
+                />
+              </div>
+            </div>
+          )}
+        </div>
 
-    {/* Live Preview Box */}
-<div className="bg-white/5 border border-white/10 rounded-xl shadow-xl mb-10 overflow-hidden">
-  {/* Fake Browser Header */}
-  <div className="flex items-center px-4 py-2 bg-gray-800 text-white text-sm font-mono border-b border-white/10">
-    <span className="w-3 h-3 bg-red-400 rounded-full mr-2" />
-    <span className="w-3 h-3 bg-yellow-400 rounded-full mr-2" />
-    <span className="w-3 h-3 bg-green-400 rounded-full mr-4" />
-    <span className="truncate">{project.link}</span>
-  </div>
+        {/* Toggle Mode */}
+        <div className="flex justify-center mb-6">
+          <button
+            onClick={() => setPreviewMode(prev => prev === 'desktop' ? 'mobile' : 'desktop')}
+            className="px-4 py-1 bg-white text-black rounded-md text-sm font-medium hover:bg-gray-100 transition"
+          >
+            Switch to {previewMode === 'desktop' ? 'Mobile' : 'Desktop'} View
+          </button>
+        </div>
 
-  {/* Iframe Loader / Preview */}
-  {!iframeLoaded ? (
-    <div className="flex flex-col items-center justify-center h-[350px] bg-gradient-to-r from-black via-gray-900 to-black animate-pulse text-white font-mono gap-3">
-      <div className="w-10 h-10 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
-      <p className="text-sm tracking-wide">Launching live preview...</p>
-            { window.scrollTo({top: 0,left: 0,behavior: "smooth"})}
+        {/* Action Buttons */}
+        <div className="flex gap-4 justify-center mb-10 flex-wrap">
+          <a href={project.link} target="_blank" rel="noopener noreferrer" className="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded text-sm font-medium transition">Open Fullscreen</a>
+          <a href={project.github} target="_blank" rel="noopener noreferrer" className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded text-sm font-medium transition">GitHub Repo</a>
+        </div>
+
+       
+
+        {/* Other Projects Slider */}
+        <h2 className="text-xl font-semibold text-center mb-4">⟡ Explore Other Projects ⟡</h2>
+        <div className="max-w-[850px] mx-auto">
+          <Slider {...sliderSettings}>
+            {otherProjects.map((p, idx) => (
+              <div key={idx} className="p-4">
+                <Link to={`/projects/${p.slug}`}>
+                  <div className="bg-white/5 rounded-xl shadow-md overflow-hidden transition hover:scale-105">
+                    <img src={p.image} alt={p.title} className="w-full h-64 md:h-100 object-cover" />
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold">{p.title}</h3>
+                      <p className="text-sm text-gray-300 mb-2">{p.description.slice(0, 80)}...</p>
+                      <div className="flex gap-3 text-white/80 text-xl">
+                        {p.technologies.map((tech, i) => (
+                          <FontAwesomeIcon
+                            key={i}
+                            icon={tech}
+                            className={`${iconColors[tech.iconName] || 'text-white/80'}`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </Slider>
+        </div>
+
       </div>
-  ) : (
-    <div
-      className={`w-full flex justify-center ${
-        previewMode === 'mobile' ? 'overflow-x-auto px-2' : ''
-      }`}
-    >
-      <div
-        className={`${
-          previewMode === 'mobile'
-            ? 'w-[390px] h-[667px]' // slightly more width to simulate iPhone
-            : 'w-full max-w-[1024px] h-[500px]'
-        } bg-white transition-all duration-300 rounded-md overflow-hidden shadow-lg`}
-      >
-        <iframe
-          src={project.link}
-          title="Live Preview"
-          loading="lazy"
-          allow="fullscreen"
-          className={`w-full h-full transition-opacity duration-500 border-none ${
-            iframeLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
-        />
-      </div>
-    </div>
-  )}
-</div>
- {/* Toggle Button */}
-      <div className="flex justify-center mb-6">
-        <button
-          onClick={() => setPreviewMode(prev => (prev === 'desktop' ? 'mobile' : 'desktop'))}
-          className="px-4 py-1 bg-white text-black rounded-md text-sm font-medium shadow-md hover:bg-gray-100 transition"
-        >
-          Switch to {previewMode === 'desktop' ? 'Mobile' : 'Desktop'} View
-        </button>
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex gap-4 justify-center flex-wrap mb-10">
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-indigo-500 hover:bg-indigo-600 px-4 py-2 rounded text-sm font-medium transition"
-        >
-          Open Fullscreen
-        </a>
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded text-sm font-medium transition"
-        >
-          GitHub Repo
-        </a>
-      </div>
-
-      {/* Tech Stack Icons */}
-      <div className="flex gap-4 justify-center flex-wrap text-white/80">
-        {project.technologies.map((tech, i) => (
-          <FontAwesomeIcon key={i} icon={tech} className="text-2xl" />
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-
-
+    </section>
+  );
 }
