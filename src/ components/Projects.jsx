@@ -16,19 +16,9 @@ import 'slick-carousel/slick/slick-theme.css';
 const projects = [
   {
   slug: 'zap-split',
-  title: 'ZapSplit is your all-in-one money management solution. ',
+  title: 'ZapSplit',
   image: '/assets/ZapSplit.jpg',
-   screenshots: [
-      '/assets/ZapSplit/s1.jpg',
-      '/assets/ZapSplit/s2.jpg',
-      '/assets/ZapSplit/s3.jpg',
-      '/assets/ZapSplit/s4.jpg',
-      '/assets/ZapSplit/s5.jpg',
-      '/assets/ZapSplit/s6.jpg',
-      '/assets/ZapSplit/s7.jpg',
-
-      ],
-  description:
+    description:
     'ZapSplit is your all-in-one money management solution. Top up your wallet, split bills, earn rewards, pay later, and stay on top of your finances — all in one app.',
   link: 'https://zapsplit.netlify.app/',
   github: 'https://github.com/SkAltmash/PathanTutorials', 

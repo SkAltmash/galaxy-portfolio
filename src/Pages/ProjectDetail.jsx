@@ -116,14 +116,13 @@ const projects = [
   slug: 'zap-split',
   title: 'ZapSplit ',
   image: '/assets/ZapSplit.jpg',
-   screenshots: [
+  screenshots: [
       '/assets/ZapSplit/s1.jpg',
       '/assets/ZapSplit/s2.jpg',
       '/assets/ZapSplit/s3.jpg',
       '/assets/ZapSplit/s4.jpg',
       '/assets/ZapSplit/s5.jpg',
       '/assets/ZapSplit/s6.jpg',
-      '/assets/ZapSplit/s7.jpg',
 
       ],
   description:
@@ -143,7 +142,6 @@ const iconColors = {
   [faServer.iconName]: 'text-green-400',
 };
 
-// ...imports remain the same
 
 export default function ProjectDetail() {
   const { slug } = useParams();
