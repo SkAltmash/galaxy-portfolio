@@ -112,6 +112,26 @@ const projects = [
   github: 'https://github.com/SkAltmash/PathanTutorials', 
   technologies: [faReact, faCss3Alt, faJs, faGithub],
 },
+{
+  slug: 'zap-split',
+  title: 'ZapSplit ',
+  image: '/assets/ZapSplit.jpg',
+   screenshots: [
+      '/assets/ZapSplit/s1.jpg',
+      '/assets/ZapSplit/s2.jpg',
+      '/assets/ZapSplit/s3.jpg',
+      '/assets/ZapSplit/s4.jpg',
+      '/assets/ZapSplit/s5.jpg',
+      '/assets/ZapSplit/s6.jpg',
+      '/assets/ZapSplit/s7.jpg',
+
+      ],
+  description:
+    'ZapSplit is your all-in-one money management solution. Top up your wallet, split bills, earn rewards, pay later, and stay on top of your finances — all in one app.',
+  link: 'https://zapsplit.netlify.app/',
+  github: 'https://github.com/SkAltmash/PathanTutorials', 
+  technologies: [faReact, faCss3Alt, faJs, faGithub],
+},
 ];
 
 const iconColors = {
@@ -123,17 +143,19 @@ const iconColors = {
   [faServer.iconName]: 'text-green-400',
 };
 
+// ...imports remain the same
+
 export default function ProjectDetail() {
   const { slug } = useParams();
   const project = projects.find(p => p.slug === slug);
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [previewMode, setPreviewMode] = useState('desktop');
+  const [showPreview, setShowPreview] = useState(false); // NEW
 
   useEffect(() => {
     setIframeLoaded(false);
-    const timer = setTimeout(() => setIframeLoaded(true), 5000);
+    setShowPreview(false); // Reset preview on slug change
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    return () => clearTimeout(timer);
   }, [slug]);
 
   const sliderSettings = {
@@ -163,7 +185,6 @@ export default function ProjectDetail() {
   return (
     <section className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white px-4 py-10 md:px-16">
       <div className="max-w-5xl mx-auto">
-
         {/* Back Button */}
         <div className="mb-6">
           <Link to="/#projects" className="text-blue-400 hover:underline text-sm">
@@ -183,7 +204,8 @@ export default function ProjectDetail() {
         <p className="text-gray-300 text-center max-w-3xl mx-auto mb-8">
           {project.description}
         </p>
-        {/* Tech Stack Icons with Color */}
+
+        {/* Tech Stack Icons */}
         <div className="flex gap-4 justify-center mb-16 flex-wrap text-xl">
           {project.technologies.map((tech, i) => (
             <FontAwesomeIcon
@@ -193,6 +215,7 @@ export default function ProjectDetail() {
             />
           ))}
         </div>
+
         {/* Screenshots */}
         <h2 className="text-xl font-semibold text-center mb-4">⟡ Project Screenshots ⟡</h2>
         <div className="max-w-[850px] mx-auto mb-10">
@@ -202,90 +225,103 @@ export default function ProjectDetail() {
                 <img
                   src={src}
                   alt={`screenshot-${i}`}
-                  className="rounded-lg border border-white/20 max-h-[400px] object-contain"
+                  className="rounded-lg border border-white/20 max-h-[400px] object-cover m-auto"
                 />
               </div>
             ))}
           </Slider>
         </div>
 
-        {/* Live Preview */}
-        <h2 className="text-xl font-semibold text-center mb-3">⟡ Live Preview ⟡</h2>
-        <div className="bg-white/5 border border-white/10 rounded-xl mb-6 overflow-hidden">
-          <div className="flex items-center px-4 py-2 bg-gray-800 text-white text-sm font-mono border-b border-white/10">
-            <span className="w-3 h-3 bg-red-400 rounded-full mr-2" />
-            <span className="w-3 h-3 bg-yellow-400 rounded-full mr-2" />
-            <span className="w-3 h-3 bg-green-400 rounded-full mr-4" />
-            <span className="truncate">{project.link}</span>
-          </div>
-
-          {!iframeLoaded ? (
-            <div className="flex flex-col items-center justify-center h-[350px] bg-black animate-pulse text-white gap-3">
-              <div className="w-10 h-10 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
-              <p className="text-sm">Launching live preview...</p>
-            </div>
-          ) : (
-            <div className={`w-full flex justify-center ${previewMode === 'mobile' ? 'overflow-x-auto px-2' : ''}`}>
-              <div className={`${previewMode === 'mobile' ? 'w-[390px] h-[667px]' : 'w-full max-w-[1024px] h-[500px]'} bg-white transition-all duration-300 rounded overflow-hidden`}>
-                <iframe
-                  src={project.link}
-                  title="Live Preview"
-                  loading="lazy"
-                  allow="fullscreen"
-                  className="w-full h-full border-none"
-                />
-              </div>
-            </div>
+        {/* Live Preview Button */}
+        <div className="flex justify-center mb-6">
+          {!showPreview && (
+            <button
+              onClick={() => {
+                setShowPreview(true);
+                setTimeout(() => setIframeLoaded(true), 2000);
+              }}
+              className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-md text-sm font-medium transition"
+            >
+              Show Live Preview
+            </button>
           )}
         </div>
 
-        {/* Toggle Mode */}
-        <div className="flex justify-center mb-6">
-          <button
-            onClick={() => setPreviewMode(prev => prev === 'desktop' ? 'mobile' : 'desktop')}
-            className="px-4 py-1 bg-white text-black rounded-md text-sm font-medium hover:bg-gray-100 transition"
-          >
-            Switch to {previewMode === 'desktop' ? 'Mobile' : 'Desktop'} View
-          </button>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex gap-4 justify-center mb-10 flex-wrap">
-          <a href={project.link} target="_blank" rel="noopener noreferrer" className="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded text-sm font-medium transition">Open Fullscreen</a>
-          <a href={project.github} target="_blank" rel="noopener noreferrer" className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded text-sm font-medium transition">GitHub Repo</a>
-        </div>
-
-       
-
-        {/* Other Projects Slider */}
-        <h2 className="text-xl font-semibold text-center mb-4">⟡ Explore Other Projects ⟡</h2>
-        <div className="max-w-[850px] mx-auto">
-          <Slider {...sliderSettings}>
-            {otherProjects.map((p, idx) => (
-              <div key={idx} className="p-4">
-                <Link to={`/projects/${p.slug}`}>
-                  <div className="bg-white/5 rounded-xl shadow-md overflow-hidden transition hover:scale-105">
-                    <img src={p.image} alt={p.title} className="w-full h-64 md:h-100 object-cover" />
-                    <div className="p-4">
-                      <h3 className="text-lg font-semibold">{p.title}</h3>
-                      <p className="text-sm text-gray-300 mb-2">{p.description.slice(0, 80)}...</p>
-                      <div className="flex gap-3 text-white/80 text-xl">
-                        {p.technologies.map((tech, i) => (
-                          <FontAwesomeIcon
-                            key={i}
-                            icon={tech}
-                            className={`${iconColors[tech.iconName] || 'text-white/80'}`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </Link>
+        {/* Live Preview */}
+        {showPreview && (
+          <>
+            <h2 className="text-xl font-semibold text-center mb-3">⟡ Live Preview ⟡</h2>
+            <div className="bg-white/5 border border-white/10 rounded-xl mb-6 overflow-hidden">
+              <div className="flex items-center px-4 py-2 bg-gray-800 text-white text-sm font-mono border-b border-white/10">
+                <span className="w-3 h-3 bg-red-400 rounded-full mr-2" />
+                <span className="w-3 h-3 bg-yellow-400 rounded-full mr-2" />
+                <span className="w-3 h-3 bg-green-400 rounded-full mr-4" />
+                <span className="truncate">{project.link}</span>
               </div>
-            ))}
-          </Slider>
-        </div>
 
+              {!iframeLoaded ? (
+                <div className="flex flex-col items-center justify-center h-[350px] bg-black animate-pulse text-white gap-3">
+                  <div className="w-10 h-10 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+                  <p className="text-sm">Launching live preview...</p>
+                </div>
+              ) : (
+                <div className={`w-full flex justify-center ${previewMode === 'mobile' ? 'overflow-x-auto px-2' : ''}`}>
+                  <div className={`${previewMode === 'mobile' ? 'w-[390px] h-[667px]' : 'w-full max-w-[1024px] h-[500px]'} bg-white transition-all duration-300 rounded overflow-hidden`}>
+                    <iframe
+                      src={project.link}
+                      title="Live Preview"
+                      loading="lazy"
+                      allow="fullscreen"
+                      onLoad={() => setIframeLoaded(true)}
+                      className="w-full h-full border-none"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Toggle Mode */}
+            <div className="flex justify-center mb-6">
+              <button
+                onClick={() => setPreviewMode(prev => prev === 'desktop' ? 'mobile' : 'desktop')}
+                className="px-4 py-1 bg-white text-black rounded-md text-sm font-medium hover:bg-gray-100 transition"
+              >
+                Switch to {previewMode === 'desktop' ? 'Mobile' : 'Desktop'} View
+              </button>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-4 justify-center mb-10 flex-wrap">
+              <a href={project.link} target="_blank" rel="noopener noreferrer" className="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded text-sm font-medium transition">Open Fullscreen</a>
+              <a href={project.github} target="_blank" rel="noopener noreferrer" className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded text-sm font-medium transition">GitHub Repo</a>
+            </div>
+          </>
+        )}
+
+        {/* Other Projects */}
+        <h2 className="text-xl font-semibold text-center mb-4">⟡ Explore Other Projects ⟡</h2>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {otherProjects.map((p, idx) => (
+            <Link to={`/projects/${p.slug}`} key={idx}>
+              <div className="bg-white/5 rounded-xl shadow-md overflow-hidden transition hover:scale-105">
+                <img src={p.image} alt={p.title} className="w-full h-48 object-cover" />
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold">{p.title}</h3>
+                  <p className="text-sm text-gray-300 mb-2">{p.description.slice(0, 80)}...</p>
+                  <div className="flex gap-3 text-white/80 text-xl flex-wrap">
+                    {p.technologies.map((tech, i) => (
+                      <FontAwesomeIcon
+                        key={i}
+                        icon={tech}
+                        className={`${iconColors[tech.iconName] || 'text-white/80'}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );
