@@ -218,7 +218,7 @@ export default function ProjectDetail() {
 
         {/* Screenshots */}
         <h2 className="text-xl font-semibold text-center mb-4">⟡ Project Screenshots ⟡</h2>
-        <div className="max-w-[850px] mx-auto mb-10">
+        <div className="max-w-[850px] mx-auto mb-10 bg-[#1b1b1b1]">
           <Slider {...sliderSettings}>
             {project.screenshots.map((src, i) => (
               <div key={i} className="flex justify-center">
