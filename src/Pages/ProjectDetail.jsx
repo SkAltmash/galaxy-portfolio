@@ -218,10 +218,10 @@ export default function ProjectDetail() {
 
         {/* Screenshots */}
         <h2 className="text-xl font-semibold text-center mb-4">⟡ Project Screenshots ⟡</h2>
-        <div className="max-w-[850px] mx-auto mb-10 bg-[#1b1b1b1]">
+        <div className="max-w-[850px] mx-auto mb-10">
           <Slider {...sliderSettings}>
             {project.screenshots.map((src, i) => (
-              <div key={i} className="flex justify-center">
+              <div key={i} className="flex justify-center bg-[#1b1b1b] rounded-lg min-h-[200px]">
                 <img
                   src={src}
                   alt={`screenshot-${i}`}
@@ -290,14 +290,14 @@ export default function ProjectDetail() {
               </button>
             </div>
 
-            {/* Action Buttons */}
+           
+          </>
+        )}
+ {/* Action Buttons */}
             <div className="flex gap-4 justify-center mb-10 flex-wrap">
               <a href={project.link} target="_blank" rel="noopener noreferrer" className="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded text-sm font-medium transition">Open Fullscreen</a>
               <a href={project.github} target="_blank" rel="noopener noreferrer" className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded text-sm font-medium transition">GitHub Repo</a>
             </div>
-          </>
-        )}
-
         {/* Other Projects */}
         <h2 className="text-xl font-semibold text-center mb-4">⟡ Explore Other Projects ⟡</h2>
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
